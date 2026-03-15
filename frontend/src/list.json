@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Story Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 0,
+    "category": "Free",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Comedy Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 20,
+    "category": "Entertainment",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Music Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 100,
+    "category": "Song",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Food Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 200,
+    "category": "Food",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Sports Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 100,
+    "category": "Games",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Adventure Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 0,
+    "category": "Free",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 7,
+    "name": "History Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 0,
+    "category": "Free",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Science Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 0,
+    "category": "Free",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Travel Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 0,
+    "category": "Free",
+    "image": "/book.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Mystery Book",
+    "title": "Discover stories that inspire and ideas that transform.",
+    "price": 200,
+    "category": "Free",
+    "image": "/book.jpg"
+  }
+]
