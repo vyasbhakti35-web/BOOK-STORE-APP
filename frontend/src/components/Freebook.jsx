@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import list from "../list.json";
+
 import Cards from "./Cards";
+import axios from "axios";
 
 function Freebook() {
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [book, setBook] = useState([]);
 
-  const filterData = list.filter((data) => data.category === "Free");
+  useEffect(() => {
+    const getBook = async () => {
+      try {
+        const res = await axios.get("http://localhost:4001/book");
+        console.log(res.data);
+        setBook(res.data.filter((data) => data.category === "Free"));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getBook();
+  }, []);
+
+  const [selectedBook, setSelectedBook] = useState(null);
 
   const settings = {
     dots: true,
@@ -62,7 +76,7 @@ function Freebook() {
       </div>
 
       <Slider {...settings}>
-        {filterData.map((item) => (
+        {book.map((item) => (
           <div key={item.id}>
             <Cards item={item} onOpen={openBook} />
           </div>
@@ -77,14 +91,18 @@ function Freebook() {
           <div className="mt-4 flex gap-2">
             <button
               className="btn bg-pink-500 text-white hover:bg-pink-600 border-none"
-              onClick={() => alert("Here you will open Reader / PDF / Book page later")}
+              onClick={() =>
+                alert("Here you will open Reader / PDF / Book page later")
+              }
             >
               Read Now
             </button>
 
             <button
               className="btn btn-ghost"
-              onClick={() => document.getElementById("free_book_modal").close()}
+              onClick={() =>
+                document.getElementById("free_book_modal").close()
+              }
             >
               Close
             </button>

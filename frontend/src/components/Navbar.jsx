@@ -6,6 +6,9 @@ function Navbar() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [sticky, setSticky] = useState(false);
 
+  //  (control admin visibility)
+  const isAdmin = false;
+
   useEffect(() => {
     const element = document.documentElement;
 
@@ -39,18 +42,17 @@ function Navbar() {
 
   const navItems = (
     <>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/courses">Courses</Link>
-      </li>
-      <li>
-        <a href="/#contact">Contact</a>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/courses">Courses</Link></li>
+      <li><Link to="/contact">Contact</Link></li>
+      <li><Link to="/about">About</Link></li>
+
+      {/* Admin hidden unless isAdmin = true */}
+      {isAdmin && (
+        <li>
+          <Link to="/admin">Admin</Link>
+        </li>
+      )}
     </>
   );
 
@@ -105,13 +107,7 @@ function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
+                <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
                   <circle cx="11" cy="11" r="8"></circle>
                   <path d="m20 21-4.3-4.3"></path>
                 </g>
@@ -127,37 +123,20 @@ function Navbar() {
               onChange={() => setTheme(theme === "light" ? "dark" : "light")}
             />
 
-            <svg
-              className="swap-on h-6 w-6 stroke-current text-yellow-500"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
+            <svg className="swap-on h-6 w-6 stroke-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="5" strokeWidth="2" />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                 d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
               />
             </svg>
 
-            <svg
-              className="swap-off h-6 w-6 stroke-current text-gray-700 dark:text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
+            <svg className="swap-off h-6 w-6 stroke-current text-gray-700 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                 d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"
               />
             </svg>
           </label>
 
-          {/* */}
           <a
             className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
             onClick={() => document.getElementById("my_modal_3")?.showModal()}
