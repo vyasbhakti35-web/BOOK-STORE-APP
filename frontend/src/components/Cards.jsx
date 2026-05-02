@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "./cartprovider";
+import { useAuth } from "./context/Authprovider";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 function Cards({ item }) {
   const isFree = item.price === 0 || item.category === "Free";
 
-  const handleClick = () => {
-    if (isFree) {
-      alert(`Opening free book: ${item.name}`);
-    } else {
-      alert("This is a premium book. Login or purchase required.");
+  const { addToCart } = useCart();
+  const [authUser] = useAuth();
+  const [recommendedBooks, setRecommendedBooks] = useState([]);
+
+  const handleAddToCart = () => {
+    addToCart(item);
+    toast.success("Book added to cart");
+  };
+
+  const getRecommendations = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:4001/book/recommend/${item.category}`
+      );
+
+      const filteredBooks = res.data.filter((book) => book._id !== item._id);
+      setRecommendedBooks(filteredBooks);
+
+      toast.success("Recommended books loaded");
+    } catch (error) {
+      console.log("Recommendation error:", error);
+      toast.error("Failed to load recommendations");
     }
   };
 
@@ -34,13 +56,57 @@ function Cards({ item }) {
             {isFree ? "Free" : `$${item.price}`}
           </span>
 
-          <button
-            onClick={handleClick}
-            className="px-4 py-1 border-2 rounded-full text-sm hover:bg-pink-500 hover:text-white transition duration-200"
-          >
-            {isFree ? "Open" : "Buy Now"}
-          </button>
+          {isFree ? (
+            <Link to={`/book/${item._id}`}>
+              <button className="px-4 py-1 border-2 rounded-full text-sm hover:bg-pink-500 hover:text-white transition duration-200">
+                Read
+              </button>
+            </Link>
+          ) : authUser ? (
+            <button
+              onClick={handleAddToCart}
+              className="px-4 py-1 border-2 rounded-full text-sm hover:bg-pink-500 hover:text-white transition duration-200"
+            >
+              Add to Cart
+            </button>
+          ) : (
+            <Link to="/signup">
+              <button className="px-4 py-1 border-2 rounded-full text-sm hover:bg-pink-500 hover:text-white transition duration-200">
+                Buy Now
+              </button>
+            </Link>
+          )}
         </div>
+
+        <button
+          onClick={getRecommendations}
+          className="btn btn-sm btn-primary mt-4"
+        >
+          Show Recommendations
+        </button>
+
+        {recommendedBooks.length > 0 && (
+          <div className="mt-4 border-t pt-3">
+            <h3 className="font-bold text-lg mb-2">Recommended Books</h3>
+
+            <div className="space-y-2">
+              {recommendedBooks.map((book) => (
+                <div
+                  key={book._id}
+                  className="border rounded-lg p-2 dark:border-gray-600"
+                >
+                  <h4 className="font-semibold">{book.name}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {book.category}
+                  </p>
+                  <p className="text-sm">
+                    {book.price === 0 ? "Free" : `$${book.price}`}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Banner() {
   return (
@@ -47,10 +48,12 @@ function Banner() {
             />
           </label>
 
-          {/* CTA Button */}
-          <button className="btn bg-pink-500 text-white border-none hover:bg-pink-600 px-12 py-3 text-lg shadow-md hover:shadow-xl transition duration-300">
-            Get Started
-          </button>
+          <Link
+  to="/courses"
+  className="btn bg-pink-500 hover:bg-pink-600 text-white border-none mt-4 px-8"
+>
+  Get Started
+</Link>
 
         </div>
       </div>
