@@ -21,7 +21,7 @@ function Cart() {
   }, []);
 
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + Number(item.price) * item.quantity,
     0
   );
 
@@ -41,27 +41,56 @@ function Cart() {
         <>
           {cartItems.map((item) => (
             <div
-              key={item._id}
-              className="flex justify-between items-center border p-4 rounded-xl mb-4"
+              key={item._id || item.id}
+              className="flex justify-between items-center border p-4 rounded-xl mb-4 bg-white dark:bg-slate-900"
             >
               <div>
                 <h2 className="text-xl font-semibold">{item.name}</h2>
-                <p>{item.price === 0 ? "Free" : `$${item.price}`}</p>
+                <p>{Number(item.price) === 0 ? "Free" : `$${item.price}`}</p>
                 <p>Quantity: {item.quantity}</p>
+
+                {Number(item.price) === 0 && (
+                  <div className="flex gap-2 mt-3">
+                    <Link
+                      to={`/read-book/${item._id || item.id}`}
+                      state={{ book: item }}
+                    >
+                      <button className="px-4 py-1 rounded-md bg-blue-500 text-white hover:bg-blue-600">
+                        Read
+                      </button>
+                    </Link>
+
+                    {item.pdfUrl && (
+                      <a
+                        href={item.pdfUrl}
+                        download
+                        className="px-4 py-1 rounded-md bg-green-500 text-white hover:bg-green-600"
+                      >
+                        Download
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
 
-              <div className="flex gap-2">
-                <button onClick={() => decreaseQty(item._id)} className="btn btn-sm">
+              <div className="flex gap-3 items-center">
+                <button
+                  onClick={() => decreaseQty(item._id || item.id)}
+                  className="px-3 py-1 border rounded-md bg-white text-black hover:bg-gray-100"
+                >
                   -
                 </button>
 
-                <button onClick={() => increaseQty(item._id)} className="btn btn-sm">
+                <button
+                  onClick={() => increaseQty(item._id || item.id)}
+                  className="px-3 py-1 border rounded-md bg-white text-black hover:bg-gray-100"
+                >
                   +
                 </button>
 
                 <button
-                  onClick={() => removeFromCart(item._id)}
-                  className="btn btn-error btn-sm text-white"
+                  onClick={() => removeFromCart(item._id || item.id)}
+                  className="px-4 py-1 rounded-md bg-red-500 text-white hover:bg-red-600"
                 >
                   Remove
                 </button>
@@ -73,7 +102,7 @@ function Cart() {
 
           <Link
             to="/checkout"
-            className="btn bg-pink-500 hover:bg-pink-600 text-white border-none mt-6"
+            className="inline-block px-5 py-3 rounded-md bg-pink-500 hover:bg-pink-600 text-white mt-6"
           >
             Proceed to Checkout
           </Link>
@@ -86,7 +115,10 @@ function Cart() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {recommendedBooks.map((book) => (
-                  <div key={book._id} className="card bg-base-100 shadow-xl p-4 border">
+                  <div
+                    key={book._id || book.id}
+                    className="card bg-base-100 shadow-xl p-4 border"
+                  >
                     <img
                       src={book.image}
                       alt={book.name}
@@ -95,14 +127,21 @@ function Cart() {
 
                     <h3 className="font-bold mt-3">{book.name}</h3>
                     <p>{book.category}</p>
-                    <p>{book.price === 0 ? "Free" : `$${book.price}`}</p>
+                    <p>{Number(book.price) === 0 ? "Free" : `$${book.price}`}</p>
 
-                    <Link
-                      to={`/book/${book._id}`}
-                      className="btn btn-sm mt-3 bg-pink-500 text-white border-none"
-                    >
-                      View Book
-                    </Link>
+                    {Number(book.price) === 0 ? (
+                      <Link
+                        to={`/read-book/${book._id || book.id}`}
+                        state={{ book }}
+                        className="inline-block px-4 py-2 mt-3 rounded-md bg-pink-500 text-white"
+                      >
+                        Read Book
+                      </Link>
+                    ) : (
+                      <button className="px-4 py-2 mt-3 rounded-md bg-pink-500 text-white">
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
@@ -115,4 +154,3 @@ function Cart() {
 }
 
 export default Cart;
-

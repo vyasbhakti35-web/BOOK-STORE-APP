@@ -14,6 +14,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (book) => {
     const exists = cartItems.find((item) => item._id === book._id);
+
     if (exists) {
       setCartItems(
         cartItems.map((item) =>
@@ -53,6 +54,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
+    localStorage.removeItem("cartItems");
   };
 
   return (

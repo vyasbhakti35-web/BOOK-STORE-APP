@@ -17,7 +17,6 @@ import Cart from "./components/cart";
 import Checkout from "./components/checkout";
 import Orders from "./components/order";
 
-
 function App() {
   const [authUser] = useAuth();
 
@@ -46,7 +45,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/book/:id" element={<ReadBook />} />
+
+          <Route path="/read-book/:id" element={<ReadBook />} />
 
           <Route
             path="/cart"
