@@ -1,82 +1,82 @@
-GROUP MEMBER
-NAME 1. BHAKTI VYAS
-NAME 2. JAY SHIHORA
-NAME 3. VRUSHIL GAJERA
+📘 Bookstore MERN Application
+📌 Overview
 
-📘 Book Store App
-📌 Project Overview
+This project is a full-stack Bookstore Web Application built using the MERN stack (MongoDB, Express, React, Node.js).
 
-The Book Store App is a web-based application that allows users to register, log in, and browse books online. The application provides access to both free books and restricted (purchased) books, where access is controlled through user authentication and permissions rather than real payment processing.
+Users can browse books, add them to a cart, place orders, and download PDFs.
+Admin can manage books, users, and orders.
 
-This project is developed as part of a Web Development course to demonstrate full-stack application concepts.
-
-👤 Target Users
-
-Users (Customers):
-Customers can create an account, log in, browse available books, access free books, and view purchased books based on access permissions.
-
-Administrators:
-Administrators manage book content and control access permissions for restricted books.
-
-✨ Key Features
-
-User registration, login, and logout
-
-Access to free books for all users
-
-Access to restricted (purchased) books based on permissions
-
-Book content management by administrators
-
-Secure data storage using a database
-
-🔐 Purchase and Access Model (Important)
-
-This application does not include real payment processing.
-The concept of “purchase” is simulated and used only to demonstrate access control and authorization. Integration of real payment gateways is considered a future enhancement.
-
-🧱 System Architecture
-
-The Book Store App follows a client–server–database architecture:
-
-The frontend provides the user interface for browsing books and managing accounts
-
-The backend handles authentication, authorization, and application logic
-
-The database stores user data, book information, and access permissions
-
-🛠️ Technologies Used
-
-Frontend: HTML, CSS, JavaScript, React
-
-Backend: Node.js, Express.js
-
+🚀 Features
+👤 User Features
+Signup and Login
+Browse books by category
+Add to cart
+Checkout and place orders
+Payment system (Card / Cash on Delivery)
+View order history
+Download PDF books
+👑 Admin Features
+Add new books
+Update book details
+Delete books
+View all users
+View all orders
+View contact messages
+🏗️ Architecture
+Frontend: React + Vite
+Backend: Node.js + Express
 Database: MongoDB
 
-📂 Project Documentation
+Flow:
+User → Frontend → Backend → Database → Response → UI
 
-README.md – Project overview
+📡 API Endpoints
+User
+POST /user/signup
+POST /user/login
+Books
+GET /book
+GET /book/:id
+GET /book/recommend/:category
+Orders
+POST /order/create
+GET /order/:userId
+PUT /order/cancel/:orderId
+Admin
+GET    /admin/books
+POST   /admin/books
+PUT    /admin/books/:id
+DELETE /admin/books/:id
+GET    /admin/orders
+GET    /admin/users
+GET    /admin/messages
+⚙️ Setup Instructions
+1. Clone Repository
+git clone https://github.com/vyasbhakti35-web/BOOK-STORE-APP.git
+2. Backend Setup
+cd backend
+npm install
+npm start
+3. Frontend Setup
+cd frontend
+npm install
+npm run dev
+🔑 Environment Variables
 
-srs.md – Software Requirements Specification
+Create .env file in backend:
 
-tests/ – Manual test cases and testing documentation
-
-🎯 Project Purpose
-
-The purpose of this project is to demonstrate:
-
-User authentication and authorization
-
-Access control for free and restricted content
-
-Full-stack web application development using modern technologies
-
-🔮 Future Enhancements
-
-Integration of real payment gateways
-
-Order and transaction management
-
-Subscription-based access
-
-Improved user interface and user experience
+PORT=4001
+MONGODB_URI=mongodb://localhost:27017/bookStore
+🧪 Testing
+Login & Signup validation
+Cart functionality
+Order placement
+Payment selection
+PDF download
+⚠️ Limitations
+Payment system is simulated
+No email notifications
+🚀 Future Improvements
+Integrate Stripe payment
+Add ratings and reviews
+Improve recommendation system
