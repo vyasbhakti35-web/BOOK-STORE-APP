@@ -15,6 +15,7 @@ Checkout and place orders
 Payment system (Card / Cash on Delivery)
 View order history
 Download PDF books
+
 👑 Admin Features
 Add new books
 Update book details
@@ -22,6 +23,7 @@ Delete books
 View all users
 View all orders
 View contact messages
+
 🏗️ Architecture
 Frontend: React + Vite
 Backend: Node.js + Express
@@ -50,6 +52,7 @@ DELETE /admin/books/:id
 GET    /admin/orders
 GET    /admin/users
 GET    /admin/messages
+
 ⚙️ Setup Instructions
 1. Clone Repository
 git clone https://github.com/vyasbhakti35-web/BOOK-STORE-APP.git
@@ -61,21 +64,25 @@ npm start
 cd frontend
 npm install
 npm run dev
+
 🔑 Environment Variables
 
 Create .env file in backend:
 
 PORT=4001
 MONGODB_URI=mongodb://localhost:27017/bookStore
+
 🧪 Testing
 Login & Signup validation
 Cart functionality
 Order placement
 Payment selection
 PDF download
+
 ⚠️ Limitations
 Payment system is simulated
 No email notifications
+
 🚀 Future Improvements
 Integrate Stripe payment
 Add ratings and reviews
